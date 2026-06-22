@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "988673340602",
+    "project_id": "experimenthome-be54b",
+    "storage_bucket": "experimenthome-be54b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988673340602:android:070a1916031df851c17e83",
+        "android_client_info": {
+          "package_name": "com.remotelab.experimenthome"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqnYPEeqUJGZDkp5XuURtzVjCBEPXkmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
