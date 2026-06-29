@@ -33,7 +33,7 @@ class LiveGraph extends StatelessWidget {
                             color: AppColors.textSecondary, fontSize: 13),
                       ),
                     )
-                  : LineChart(_buildChartData()),
+                  : LineChart(_buildChartData(), duration: Duration.zero),
             ),
           ],
         ),
@@ -42,12 +42,16 @@ class LiveGraph extends StatelessWidget {
   }
 
   LineChartData _buildChartData() {
-    final spots = readings.asMap().entries.map((e) {
-      return FlSpot(e.key.toDouble(), e.value.currentMa);
-    }).toList();
-
-    final maxY = readings.map((r) => r.currentMa).reduce((a, b) => a > b ? a : b);
-    final minY = readings.map((r) => r.currentMa).reduce((a, b) => a < b ? a : b);
+    // Single pass: build spots and find min/max simultaneously
+    final spots = <FlSpot>[];
+    double maxY = double.negativeInfinity;
+    double minY = double.infinity;
+    for (int i = 0; i < readings.length; i++) {
+      final v = readings[i].currentMa;
+      spots.add(FlSpot(i.toDouble(), v));
+      if (v > maxY) maxY = v;
+      if (v < minY) minY = v;
+    }
     final yPadding = (maxY - minY) * 0.2;
 
     return LineChartData(
@@ -71,7 +75,7 @@ class LiveGraph extends StatelessWidget {
               style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
           sideTitles: SideTitles(
             showTitles: true,
-            interval: 20,
+            interval: 10,
             getTitlesWidget: (value, meta) => Text(
               value.toInt().toString(),
               style: const TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/app_colors.dart';
+import '../../home/screens/home_screen.dart';
 import '../../catalog/screens/catalog_screen.dart';
 import '../../history/screens/history_screen.dart';
 import '../../profile/screens/profile_screen.dart';
@@ -15,6 +16,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = const [
+    HomeScreen(),
     CatalogScreen(),
     HistoryScreen(),
     ProfileScreen(),
@@ -36,6 +38,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
         elevation: 8,
         type: BottomNavigationBarType.fixed,
         items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
+            label: 'Home',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.biotech_outlined),
             activeIcon: Icon(Icons.biotech),

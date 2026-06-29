@@ -5,6 +5,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/models/session_record.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/services/firestore_service.dart';
+import '../../../widgets/chip_logo.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -68,13 +69,14 @@ class _SessionCard extends StatelessWidget {
   final SessionRecord session;
   const _SessionCard({required this.session});
 
+  static final _fmt = DateFormat('dd MMM yyyy, HH:mm');
+
   String _resistorLabel(int ohms) =>
       ohms >= 1000 ? '${ohms ~/ 1000}kΩ' : '$ohmsΩ';
 
   @override
   Widget build(BuildContext context) {
-    final dateStr =
-        DateFormat('dd MMM yyyy, HH:mm').format(session.startedAt);
+    final dateStr = _fmt.format(session.startedAt);
     final duration =
         session.endedAt?.difference(session.startedAt).inSeconds;
 
@@ -88,7 +90,7 @@ class _SessionCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(Icons.science, color: AppColors.primary, size: 18),
+                const ChipLogo(size: 24),
                 const SizedBox(width: 8),
                 Text('Ohm\'s Law Verification',
                     style: const TextStyle(

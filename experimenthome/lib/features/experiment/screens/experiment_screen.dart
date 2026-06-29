@@ -129,7 +129,7 @@ class _ExperimentScreenState extends State<ExperimentScreen>
       if (!mounted) return;
       setState(() {
         _readings.add(reading);
-        if (_readings.length > 120) _readings.removeAt(0);
+        if (_readings.length > 60) _readings.removeAt(0);
         if (reading.currentMa > _peakCurrentMa) {
           _peakCurrentMa = reading.currentMa;
         }
@@ -275,7 +275,9 @@ class _ExperimentScreenState extends State<ExperimentScreen>
         children: [
           CurrentDisplay(currentMa: currentMa, isActive: _sessionActive),
           const SizedBox(height: 16),
-          LiveGraph(readings: _readings, isActive: _sessionActive),
+          RepaintBoundary(
+            child: LiveGraph(readings: _readings, isActive: _sessionActive),
+          ),
           const SizedBox(height: 16),
           ResistorSelector(
             options: _resistorOptions,
